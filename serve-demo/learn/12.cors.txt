@@ -1,0 +1,24 @@
+接口跨域问题处理
+1.通过cors中间件解决跨域问题
+cors:跨域资源共享，由一系列http响应头组成，这些响应头决定浏览器是否阻止前端js代码跨域获取资源
+如果接口服务器配置了cors相关的http响应头，就可以解决浏览器端的跨域访问限制
+注意：cors在服务端进行配置，客户端浏览器无须做额外的配置
+cors需注意浏览器的兼容性
+
+cors响应头部配置：响应头可以带一个Access-Control-Allow-Origin字段，值为指定允许访问该资源的外援url
+例如：res.setHeader('Access-Control-Allow-Origin',origin)(可用通配符表示允许全部)
+
+默认情况下，cors仅支持客户端向服务器发送九个请求头，具体可看文档，如果发送了额外的请求头，需要在服务器端对额外的请求头进行声明，否则请求会失败
+如： res.setHeader('Access-Control-Allow-Headers','Content-Type','X-Custom-Header')
+
+默认情况下，cors仅支持客户端发起get、post、head请求，如果有put、delete等请求方式，需指明实际请求所允许使用的htto方法
+如：res.setHeader('Access-Control-Allow-Methods',methods)(可用通配符表示允许全部)
+
+预检请求:只要符合以下条件的,都需要进行预检请求
+1.请求方式为get、post、head之外的请求
+2.请求头中包含自定义头部字段
+3.向服务器发送了application/json格式的数据
+
+在服务器和浏览器通信之前，浏览器会先发送option请求进行预检，以获知服务器是否允许该请求，这一次的请求也被称为预检请求
+服务器响应预检请求成功后，才会发送真正的请求，并携带真实数据
+2.jsonp处理跨域，具体看文档（只能实现get请求）

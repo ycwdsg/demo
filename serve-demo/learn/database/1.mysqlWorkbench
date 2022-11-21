@@ -1,0 +1,8 @@
+创建表时，各个缩写的含义：
+PK（Primary Key）：主键
+NN（not null）不能为空
+UQ（unique）值唯一
+AI（atuo increment）自动增加
+B（binary）二进制
+ZF（zero fill）补零
+G（generated）计算列
