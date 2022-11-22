@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { UserOutlined } from '@ant-design/icons-vue';
-import type { FormInstance } from 'ant-design-vue';
+import { FormInstance, message } from 'ant-design-vue';
 import type { Rule } from 'ant-design-vue/es/form';
 import {userStore} from './store/user'
 import {setCookie,getCookie} from './utils/setCookie'
@@ -29,6 +29,17 @@ let validatePass = async (_rule:Rule,value:String)=>{
     return Promise.resolve()
   }
 }
+
+let validatePassAgain = async (_rule:Rule,value:string)=>{
+  if(value===''){
+    return Promise.reject('请再次确认密码！')
+  }else{
+    if (value!==drawerState.password) {
+      return Promise.reject('两次密码输入不一致！')
+    }
+    return Promise.resolve()
+  }
+}
 let dialogVisible =ref<Boolean>(false)
 const formState = reactive<FormState>({username:'',password:'',remember:false})
 const drawerState = reactive<drawerState>({username:'',password:'',conPassword:''})
@@ -38,7 +49,8 @@ const formRef = ref<FormInstance>()
 const drawerFormRef = ref<FormInstance>()
 const rules: Record<string, Rule[]> = {//Record:声明对象的key和value值的类型
   username:[{ required: true, message:'请输入用户名', trigger:'blur'}],
-  password:[{ required: true, validator: validatePass, trigger: 'blur' }]
+  password:[{ required: true, validator: validatePass, trigger: 'blur' }],
+  conPassword:[{required:true,validator:validatePassAgain,trigger: 'blur'}]
 }
 // 登录成功
  const onFinish=async(values:any)=>{
@@ -69,6 +81,21 @@ const register = () =>{
 const onClose = () =>{
   dialogVisible.value = false
 }
+
+const submit = async() =>{
+  drawerFormRef.value?.validateFields().then(res=>{
+    let userInfo = JSON.parse(JSON.stringify(res))
+    userInfo.password = encrypt(userInfo.password)
+    registerAccount(userInfo).then(val=>{      
+      if (val.status===200) {
+        drawerFormRef.value?.resetFields()
+        dialogVisible.value = false
+      }
+    })
+  }).catch(err=>{
+    console.log(err)
+  })
+}
 </script>
 
 <template>
@@ -91,6 +118,10 @@ const onClose = () =>{
               :style="{ position: 'absolute' }"
               @close="onClose"
             >
+            <template #extra>
+              <a-button style="margin-right: 8px" @click="onClose">取消</a-button>
+              <a-button type="primary" @click="submit">注册</a-button>
+            </template>
               <a-form 
                 ref="drawerFormRef"
                 :model="drawerState"
@@ -112,7 +143,7 @@ const onClose = () =>{
                 </a-form-item>
                 <a-form-item
                   label="确认密码"
-                  name="password"
+                  name="conPassword"
                 >
                   <a-input-password has-feedback v-model:value="drawerState.conPassword" placeholder="请输再次入密码" size="large"/>
                 </a-form-item>
