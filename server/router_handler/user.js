@@ -64,8 +64,7 @@ exports.login = (req,res)=>{
         if(err)return res.cc(err)
         if(result.length!==1)return res.cc('没有此账户！')
         // 比对数据库与输入的密码是否一致
-        // const compare = bcrypt.compareSync(password,result[0].password)
-        const compare = result[0].password
+        const compare = bcrypt.compareSync(password,result[0].password)
         if(!compare)return res.cc('用户名或密码错误！')
         const user = {...result[0],password:'',user_pic:''}//剔除密码和头像的信息
 

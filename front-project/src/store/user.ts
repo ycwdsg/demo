@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import type { user } from "./interface";
-
 // 抛出store对象
 export const userStore =  defineStore('user',{
     state:()=>{
@@ -31,6 +30,14 @@ export const userStore =  defineStore('user',{
         },
         saveToken(token:string){
             this.token = token
+        },
+        setUser(user:user){
+            let key :keyof user
+            for(key in user){
+                console.log(key);
+                // TODO:类型判断问题
+                // this[key as keyof user] = user[key]
+            }
         }
     }
 })

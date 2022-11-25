@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { UserOutlined } from '@ant-design/icons-vue';
-import { FormInstance, message } from 'ant-design-vue';
+import { FormInstance } from 'ant-design-vue';
 import type { Rule } from 'ant-design-vue/es/form';
-import {userStore} from './store/user'
-import {setCookie,getCookie} from './utils/setCookie'
-import {encrypt,decrypt} from './utils/auth'
+import { userStore } from './store/user'
+import { setCookie,getCookie,forgetAccount } from './utils/setCookie'
+import { encrypt,decrypt } from './utils/auth'
 import {registerAccount,login} from './api/login'
+import {setToken} from './utils/token'
 
 defineProps<{ msg: string }>()
 interface FormState {
@@ -54,15 +55,20 @@ const rules: Record<string, Rule[]> = {//Record:声明对象的key和value值的
 }
 // 登录成功
  const onFinish=async(values:any)=>{
-  values.remember? rememberAccount(values): localStorage.setItem('account','')
+  values.remember? rememberAccount(values): forgetAccount(values)
   values.password = encrypt(values.password)
-  const res = await login(values)
+  const res:any = await login(values)
+  if (res.status===200) {
+    setToken(res.token)
+    const store = userStore()
+    store.setUser(values)
+  }  
 }
 const rememberAccount=({username,password}:Record<string,string>)=>{
   const date = new Date()
   const expires = date.setTime(date.getTime() + 7*24*60*60*1000)
   const userInfo:Map<string,string> = new Map([['username',username],['password',encrypt(password) as string]])
-  setCookie(expires,userInfo)
+  setCookie(userInfo,expires)
 }
 
 onMounted(()=>{
@@ -82,6 +88,7 @@ const onClose = () =>{
   dialogVisible.value = false
 }
 
+// 注册
 const submit = async() =>{
   drawerFormRef.value?.validateFields().then(res=>{
     let userInfo = JSON.parse(JSON.stringify(res))

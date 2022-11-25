@@ -1,7 +1,10 @@
 // 配置Cookie
-export const setCookie=(expires:number,userInfo:Map<string,string>) => {
+// 不传expires默认删除cookie
+export const setCookie=(userInfo:Map<string,string|number>,expires?:number) => {
+    let time:string|number = expires ?? 0  //默认过期时间60分钟
+    time = new Date(time).toUTCString()
     for(let key of userInfo.entries()){        
-        document.cookie = key[0] + '=' + key[1] + `;expires=${expires}`
+        document.cookie = key[0] + '=' + key[1] + `;expires=${time}`
     }
 }
 
@@ -25,4 +28,13 @@ const splitCookie=(v:Array<string>):string=>{
     })        
     
     return o
+}
+
+export const forgetAccount = (val:Record<string,string>)=>{
+    const token:Map<string,number> = new Map([])
+    for(let i in val){
+        token.set(i,0)
+    }
+	//将date设置为过去的时间
+    setCookie(token)
 }

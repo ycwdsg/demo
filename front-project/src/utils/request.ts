@@ -23,10 +23,10 @@ service.interceptors.response.use((res)=>{
     const status = res.data.status
     if (status===200) {
         message.success(msg)
-        return Promise.resolve(res)
+        return Promise.resolve(res.data)
     }else if(res.data.status===500){
         message.error(msg)
-        return Promise.resolve(res)
+        return Promise.resolve(res.data)
     }else{
         return Promise.reject('未知错误')
     }
