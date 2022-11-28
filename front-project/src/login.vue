@@ -53,6 +53,8 @@ const rules: Record<string, Rule[]> = {//Record:声明对象的key和value值的
   password:[{ required: true, validator: validatePass, trigger: 'blur' }],
   conPassword:[{required:true,validator:validatePassAgain,trigger: 'blur'}]
 }
+
+const router = useRouter()
 // 登录成功
  const onFinish=async(values:any)=>{
   values.remember? rememberAccount(values): forgetAccount(values)
@@ -61,7 +63,8 @@ const rules: Record<string, Rule[]> = {//Record:声明对象的key和value值的
   if (res.status===200) {
     setToken(res.token)
     const store = userStore()
-    store.setUser(values)
+    store.setName(values)    
+    router.push('/index')
   }  
 }
 const rememberAccount=({username,password}:Record<string,string>)=>{

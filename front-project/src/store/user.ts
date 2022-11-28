@@ -25,19 +25,18 @@ export const userStore =  defineStore('user',{
         }
     },
     actions:{
-        editName(name:string){
+        setName(name:string){
             this.username = name
         },
         saveToken(token:string){
             this.token = token
         },
-        setUser(user:user){
-            let key :keyof user
-            for(key in user){
-                console.log(key);
-                // TODO:类型判断问题
-                // this[key as keyof user] = user[key]
-            }
-        }
+        // setUser(user:user){
+        //     type info = Partial<user>
+        //     let key : keyof info
+        //     for(key in user){
+        //         this[key] = user[key]
+        //     }
+        // }
     }
 })
