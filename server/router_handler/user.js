@@ -70,6 +70,6 @@ exports.login = (req,res)=>{
 
         // 对用户的信息进行加密，生成token字符串
         const tokenStr = jwt.sign(user,config.jwtSecretKey,{expiresIn:config.expiresIn})
-        res.send({status:200,token:'Bearer'+tokenStr,msg:'登录成功'})
+        res.send({status:200,token:'Bearer '+tokenStr,msg:'登录成功'})
     })
 }

@@ -3,5 +3,5 @@ module.exports = {
     // 加密解密token的密钥
     jwtSecretKey:'dasgjlkagjsd',
     // token过期时间
-    expiresIn:'12h'
+    expiresIn:'6h'
 }

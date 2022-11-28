@@ -26,10 +26,14 @@ const {expressjwt} = require('express-jwt')
 const config = require('./config')
 app.use(expressjwt({secret:config.jwtSecretKey,algorithms:['HS256']}).unless({path:[/^\/api/]}))//排除api开头的接口
 
-// 导入路由模块
+// 导入路由模块app.use('/userInfo',routers.userInfo)
 const routers = require('./router/index')
 app.use('/api',routers.user)
-
+// 遍历注册其他路由模块
+// app.use('/api',routers.userInfo)
+Object.keys(routers).forEach(val=>{
+    val==='user'?'':app.use('/project',routers[val])
+})
 // 错误级别中间件
 app.use((err,req,res,next)=>{
     if(err.name==='UnauthorizedError') return res.cc('身份认证失败！')
