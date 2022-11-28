@@ -2,6 +2,8 @@
 import axios from 'axios'
 import { message } from 'ant-design-vue'
 import 'ant-design-vue/es/message/style/css'; 
+import { userStore } from '../store/user';
+import { getCookie } from './setCookie';
 const service = axios.create({
     timeout: 30000
 })
@@ -11,7 +13,8 @@ message.config({
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8;'
 
 service.interceptors.request.use((config)=>{
-    
+    const user = userStore()
+    config.headers!['Authorization'] = user.getToken||getCookie('token')?.token//！非空断言
     return config
 },(err)=>{
     console.log('Request Error' + err)

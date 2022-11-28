@@ -22,6 +22,10 @@ export default defineConfig({
       '/api':{
         target:'http://192.168.8.51:8888',
         changeOrigin:true
+      },
+      '/project':{
+        target:'http://192.168.8.51:8888',
+        changeOrigin:true
       }
     }
   }
