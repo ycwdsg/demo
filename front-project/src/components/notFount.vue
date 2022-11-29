@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const router = useRouter()//声明必须写在最外层，写在函数内创建实例会为undefined
 const back = () =>{
-    router?.back()
+    router?.replace('/')
 }
 </script>
 <template>
     <div>
         <p>没有找到网页，请检查路径是否正确或反馈管理员</p>
         <a-button type="primary" @click="back">
-            点此返回上一级
+            点此返回首页
         </a-button>
     </div>
 </template>

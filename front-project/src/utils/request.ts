@@ -4,6 +4,7 @@ import { message } from 'ant-design-vue'
 import 'ant-design-vue/es/message/style/css'; 
 import { userStore } from '../store/user';
 import { getCookie } from './setCookie';
+import {router} from '../router/index'
 const service = axios.create({
     timeout: 30000
 })
@@ -30,8 +31,13 @@ service.interceptors.response.use((res)=>{
     }else if(res.data.status===500){
         message.error(msg)
         return Promise.resolve(res.data)
+    }else if(res.data.status===403){
+        message.error('身份认证过期，请重新登录！')        
+        router.push('/')
+        return Promise.resolve('身份认证过期，请重新登录！')
     }else{
-        return Promise.reject('未知错误')
+        message.error(msg)
+        return Promise.resolve('未知错误')
     }
 },(err)=>{
     console.log('Response Error'+err);

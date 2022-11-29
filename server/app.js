@@ -36,7 +36,7 @@ Object.keys(routers).forEach(val=>{
 })
 // 错误级别中间件
 app.use((err,req,res,next)=>{
-    if(err.name==='UnauthorizedError') return res.cc('身份认证失败！')
+    if(err.name==='UnauthorizedError') return res.cc('身份认证失败！',403)
     res.cc(err)
 })
 

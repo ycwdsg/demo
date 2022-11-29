@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { UserOutlined } from '@ant-design/icons-vue';
 import { FormInstance } from 'ant-design-vue';
 import type { Rule } from 'ant-design-vue/es/form';
-import { userStore } from './store/user'
-import { setCookie,getCookie,forgetAccount } from './utils/setCookie'
-import { encrypt,decrypt } from './utils/auth'
-import {registerAccount,login} from './api/login'
-import {setToken} from './utils/token'
+import { userStore } from '../store/user'
+import { setCookie,getCookie,forgetAccount } from '../utils/setCookie'
+import { encrypt,decrypt } from '../utils/auth'
+import {registerAccount,login} from '../api/login'
+import {setToken} from '../utils/token'
 
 defineProps<{ msg: string }>()
 interface FormState {

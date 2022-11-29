@@ -1,14 +1,21 @@
 import * as VueRouter from 'vue-router'
 import Index from '../components/index.vue'
-import Login from '../login.vue'
+import Login from '../components/login.vue'
+import { getToken } from '../utils/token'
+import { message } from 'ant-design-vue'
+import 'ant-design-vue/es/message/style/css'; 
+
+// 基础全局路由
 const routes = [
     {
         path:'/',
-        component:Login
+        component:Login,
+        name:'Login'
     },
     {
         path:'/index',
-        component:Index
+        component:Index,
+        name:'Index'
     },
     {
         path:'/:pathMatch(.*)*',
@@ -19,7 +26,14 @@ export const router =VueRouter.createRouter({
     history:VueRouter.createWebHistory(),
     routes
 })
-router.beforeEach(async(to,from)=>{
-    console.log(from,to);
-    
+// 是否登录的路由守卫
+router.beforeEach(async(to,from,next)=>{
+    if (to.name!=='Login'&&!getToken()) { 
+        message.error('请登录！')     
+        next({name:'Login'})
+    }else if(to.name==='Login'&&getToken()){
+        next({name:'Index'})
+    }else{                
+        next()
+    }
 })

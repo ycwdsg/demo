@@ -15,14 +15,11 @@ declare module '@vue/runtime-core' {
     AInput: typeof import('ant-design-vue/es')['Input']
     AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
     ARow: typeof import('ant-design-vue/es')['Row']
-    NButton: typeof import('naive-ui')['NButton']
-    NConfigProvider: typeof import('naive-ui')['NConfigProvider']
-    NForm: typeof import('naive-ui')['NForm']
-    NFormItem: typeof import('naive-ui')['NFormItem']
-    NInput: typeof import('naive-ui')['NInput']
+    Login: typeof import('./src/components/login.vue')['default']
     NotFount: typeof import('./src/components/notFount.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TopBar: typeof import('./src/components/navBar/topBar.vue')['default']
     Undefined: typeof import('./src/components/index.vue')['default']
   }
 }

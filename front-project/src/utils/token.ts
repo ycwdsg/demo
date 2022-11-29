@@ -1,4 +1,4 @@
-import {setCookie} from './setCookie'
+import {setCookie,getCookie} from './setCookie'
 import {userStore} from '../store/user'
 export const setToken=(key:string)=>{
     const date = new Date()
@@ -8,3 +8,8 @@ export const setToken=(key:string)=>{
     const user = userStore()
     user.saveToken(key)
 }   
+
+export const getToken=()=>{
+    let token = getCookie('token')?.token
+    return token
+}
