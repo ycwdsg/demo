@@ -2,9 +2,9 @@
 import axios from 'axios'
 import { message } from 'ant-design-vue'
 import 'ant-design-vue/es/message/style/css'; 
-import { userStore } from '../store/user';
+import { userStore } from 'store/user';
 import { getCookie } from './setCookie';
-import {router} from '../router/index'
+import {router} from 'router/index'
 const service = axios.create({
     timeout: 30000
 })

@@ -1,7 +1,7 @@
 import * as VueRouter from 'vue-router'
-import Index from '../components/index.vue'
-import Login from '../components/login.vue'
-import { getToken } from '../utils/token'
+import Index from 'coms/index.vue'
+import Login from 'coms/login.vue'
+import { getToken } from 'utils/token'
 import { message } from 'ant-design-vue'
 import 'ant-design-vue/es/message/style/css'; 
 

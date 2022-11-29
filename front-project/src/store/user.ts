@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { user } from "./interface";
+import type { user } from "store/interface";
 // 抛出store对象
 export const userStore =  defineStore('user',{
     state:()=>{

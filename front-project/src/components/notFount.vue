@@ -17,7 +17,7 @@ const back = () =>{
 div{
     text-align: center;
     position: relative;
-    background: url('../assets/imags/404.gif') no-repeat;
+    background: url('@/assets/imags/404.gif') no-repeat;
     height: 100vh;
     padding-top: calc(50vh - 30px);
     background-size: cover;

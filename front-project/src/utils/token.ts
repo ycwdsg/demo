@@ -1,5 +1,5 @@
 import {setCookie,getCookie} from './setCookie'
-import {userStore} from '../store/user'
+import {userStore} from 'store/user'
 export const setToken=(key:string)=>{
     const date = new Date()
     const expires = date.setTime(date.getTime() + 3*60*60*1000)//设置过期时间
