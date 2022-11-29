@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const router = useRouter()//声明必须写在最外层，写在函数内创建实例会为undefined
-const back = () =>{
-    router?.replace('/')
+const router = useRouter()// 声明必须写在最外层，写在函数内创建实例会为undefined
+const back = () => {
+  router?.replace('/')
 }
 </script>
 <template>

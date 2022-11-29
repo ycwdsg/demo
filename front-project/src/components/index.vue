@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {userInfo} from 'api/userInfo'
-const submit=async()=>{
-    await userInfo()
+import { userInfo } from 'api/userInfo'
+const submit = async () => {
+  await userInfo()
 }
 </script>
 <template>
