@@ -1,5 +1,5 @@
 // 身份认证
-import JSEncrypt from 'jsencrypt'
+import JSEncrypt from 'jsencrypt';
 
 const pubKey = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzDpr3VwyCm+aglYMGFgn
@@ -9,7 +9,7 @@ EUQogKgSggAxhpeL3J7+Rk0ldWLN/H9AFHXAXitfqZdErk+DEA1hxrtzlhW8n3Dx
 4rUELQC5/XcooIK8S0DrsphtT+DXOG4DMsyTrbXcRfQORHmgsGjLX213F0fnBqkE
 xBTzGLzBVN5R3pUDCUREyDc6nLsS2uvhTj9OY2PSU8hmuYzL4U2QASj3FayncgPd
 bwIDAQAB
------END PUBLIC KEY-----`
+-----END PUBLIC KEY-----`;
 
 const prvKey = `-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAzDpr3VwyCm+aglYMGFgn5E4RJd0z2Fi3MYMf+iJYcMkjvaiv
@@ -37,17 +37,17 @@ BK1AR7k3gSzacp8KaB3eOcGoMMJ+jtUfp/VzsPLKWqpNyE5dBugEru30skir/jYh
 qf1nwQKBgAWunOF8LfcxoUV62zxvjLIIv2YGucYFzE5uNt+5LKhnuCATjMlDyb5z
 Pj/HjHF0HN3CUGl68czNrEiyX1n0euqzAnV2CLP/Jm/IPylnNXbN56Kp3j4oV5Vn
 5iCJWr/yqt2AOWXqMxT4H9gekEQ2Ydb1yl1xwV3puWQTppLS8oap
------END RSA PRIVATE KEY-----`
+-----END RSA PRIVATE KEY-----`;
 // 公钥加密
-export const encrypt=(val:string)=>{
-    const encrypt = new JSEncrypt()
-    encrypt.setPublicKey(pubKey)
-    return encrypt.encrypt(val)
-}
+export const encrypt = (val: string) => {
+  const encryptKey = new JSEncrypt();
+  encryptKey.setPublicKey(pubKey);
+  return encryptKey.encrypt(val);
+};
 
 // 解密
-export const decrypt=(val:string)=>{
-    const decrypt = new JSEncrypt()
-    decrypt.setPrivateKey(prvKey)
-    return decrypt.decrypt(val)
-}
+export const decrypt = (val: string) => {
+  const decryptKey = new JSEncrypt();
+  decryptKey.setPrivateKey(prvKey);
+  return decryptKey.decrypt(val);
+};

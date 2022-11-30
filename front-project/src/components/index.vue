@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { userInfo } from 'api/userInfo'
+import { userInfo } from 'api/userInfo';
+
 const submit = async () => {
-  await userInfo()
-}
+  await userInfo();
+};
 </script>
 <template>
-    <a-button type="primary" @click="submit">职业</a-button>
+  <a-button type="primary" @click="submit">职业</a-button>
 </template>

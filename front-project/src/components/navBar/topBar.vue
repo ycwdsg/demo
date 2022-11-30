@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const test = '';
+console.log(test);
 </script>
-<template>
-</template>
+<template>bar</template>
