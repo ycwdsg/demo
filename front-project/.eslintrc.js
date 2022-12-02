@@ -45,7 +45,13 @@ module.exports = {
     'no-undef': 0,
     'no-param-reassign': 0,
     // 关闭非空断言警告
-    '@typescript-eslint/no-non-null-assertion': 0
+    '@typescript-eslint/no-non-null-assertion': 0,
+    // 关闭禁用返回any类型
+    '@typescript-eslint/no-unsafe-return': 0,
+    // 关闭禁用any赋值
+    '@typescript-eslint/no-unsafe-assignment': 0,
+    // 关闭禁止any的成员访问
+    '@typescript-eslint/no-unsafe-member-access': 0
   },
   settings: {
     'import/resolver': {

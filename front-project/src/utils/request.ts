@@ -1,5 +1,6 @@
 // 请求响应和拦截
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { message } from 'ant-design-vue';
 import 'ant-design-vue/es/message/style/css';
 import { userStore } from 'store/user';
@@ -26,7 +27,7 @@ service.interceptors.request.use(
 );
 
 service.interceptors.response.use(
-  async (res) => {
+  async (res: AxiosResponse) => {
     // todo:axios泛型解决any类型问题
     const msg = res.data.message || res.data.msg;
     const { status } = res.data;

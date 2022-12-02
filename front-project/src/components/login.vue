@@ -87,7 +87,7 @@ const parseAccount = () => {
 const onFinish = async (values: FormState) => {
   values.remember ? rememberAccount(values) : forgetAccount(values);
   values.password = encrypt(values.password) as string;
-  const res: res = await login(values);
+  const res: res<null> = await login(values);
   if (res.status === 200) {
     setToken(res.token as string);
     const store = userStore();

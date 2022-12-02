@@ -1,6 +1,6 @@
-interface res {
+interface res<T> {
   status: number;
-  data: Record<string, never> | Array | string;
+  data: T;
   msg?: string;
   message?: string;
   token?: string;
