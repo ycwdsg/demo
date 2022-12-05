@@ -18,6 +18,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "jsencrypt": "^3.3.1",
     "pinia": "^2.0.23",
+    "pinia-plugin-persistedstate": "^3.0.1",
     "prettier": "^2.8.0",
     "vue": "^3.2.25",
     "vue-eslint-parser": "^9.1.0",

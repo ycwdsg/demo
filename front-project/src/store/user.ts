@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import type { user } from 'store/interface';
 // 抛出store对象
 export const userStore = defineStore('user', {
   state: () => {
@@ -7,9 +6,11 @@ export const userStore = defineStore('user', {
       username: '',
       jurisdiction: '',
       occupation: '',
-      token: ''
+      token: '',
+      userInfo: {}
     };
   },
+  persist: true, // pinia持久化
   getters: {
     getName: (state) => {
       return state.username;
@@ -30,13 +31,9 @@ export const userStore = defineStore('user', {
     },
     saveToken(token: string) {
       this.token = token;
+    },
+    setUser(user: userInfo) {
+      this.userInfo = user;
     }
-    // setUser(user:user){
-    //     type info = Partial<user>
-    //     let key : keyof info
-    //     for(key in user){
-    //         this[key] = user[key]
-    //     }
-    // }
   }
 });

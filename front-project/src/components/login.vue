@@ -87,11 +87,12 @@ const parseAccount = () => {
 const onFinish = async (values: FormState) => {
   values.remember ? rememberAccount(values) : forgetAccount(values);
   values.password = encrypt(values.password) as string;
-  const res: res<null> = await login(values);
+  const res: res<userInfo> = await login(values);
   if (res.status === 200) {
     setToken(res.token as string);
     const store = userStore();
     store.setName(values.username);
+    store.setUser(res.data);
     router.push('/index');
   }
 };

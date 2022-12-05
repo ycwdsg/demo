@@ -1,4 +1,9 @@
-export interface user {
+interface userInfo {
+  // 头像
+  avatar: string;
+}
+
+interface user {
   username: string;
   // 昵称
   nickname?: string;
@@ -10,6 +15,6 @@ export interface user {
   jurisdiction: string;
   token: string;
   // 用户信息
-  userInfo: Record<string, never>;
+  userInfo?: userInfo;
   password?: readonly string;
 }

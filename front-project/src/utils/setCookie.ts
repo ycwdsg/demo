@@ -1,7 +1,5 @@
 // 配置Cookie
 
-import { user } from '@/store/interface';
-
 // 不传expires默认删除cookie
 export const setCookie = (
   userInfo: Map<string, string | number>,

@@ -1,11 +1,12 @@
 import { createApp } from 'vue';
-import { createPinia } from 'pinia';
+import pinia from 'store/index';
 import { router } from 'router/index';
 import App from './App.vue';
-
-const pinia = createPinia();
+import { getAssetsFile } from './utils/assets';
 
 const app = createApp(App);
 app.use(pinia);
 app.use(router);
+// 挂载全局方法
+app.config.globalProperties.getAssetsFile = getAssetsFile;
 app.mount('#app');

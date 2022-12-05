@@ -1,5 +1,4 @@
 import request from 'utils/request';
-import type { user } from 'store/interface';
 
 export const registerAccount = async (
   data: Pick<user, 'username' | 'password'>
