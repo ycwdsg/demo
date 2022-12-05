@@ -66,10 +66,10 @@ exports.login = (req,res)=>{
         // 比对数据库与输入的密码是否一致
         const compare = bcrypt.compareSync(password,result[0].password)
         if(!compare)return res.cc('用户名或密码错误！')
-        const user = {...result[0],password:'',user_pic:''}//剔除密码和头像的信息
-
+        const user = {...result[0],password:'',avatar:''}//剔除密码和头像的信息
+        const data = {...result[0],password:''}
         // 对用户的信息进行加密，生成token字符串
         const tokenStr = jwt.sign(user,config.jwtSecretKey,{expiresIn:config.expiresIn})
-        res.send({status:200,token:'Bearer '+tokenStr,msg:'登录成功'})
+        res.send({status:200,token:'Bearer '+tokenStr,msg:'登录成功',data:data})
     })
 }
