@@ -51,7 +51,9 @@ module.exports = {
     // 关闭禁用any赋值
     '@typescript-eslint/no-unsafe-assignment': 0,
     // 关闭禁止any的成员访问
-    '@typescript-eslint/no-unsafe-member-access': 0
+    '@typescript-eslint/no-unsafe-member-access': 0,
+    // 启用eval函数
+    'no-eval': 0
   },
   settings: {
     'import/resolver': {

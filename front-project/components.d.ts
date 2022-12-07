@@ -7,8 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AAvatar: typeof import('ant-design-vue/es')['Avatar']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
+    ACol: typeof import('ant-design-vue/es')['Col']
     ADrawer: typeof import('ant-design-vue/es')['Drawer']
     AForm: typeof import('ant-design-vue/es')['Form']
     AFormItem: typeof import('ant-design-vue/es')['FormItem']
@@ -16,6 +18,7 @@ declare module '@vue/runtime-core' {
     AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
+    APopover: typeof import('ant-design-vue/es')['Popover']
     ARow: typeof import('ant-design-vue/es')['Row']
     Login: typeof import('./src/components/login.vue')['default']
     NotFount: typeof import('./src/components/notFount.vue')['default']

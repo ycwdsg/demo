@@ -10,5 +10,6 @@
 <style lang="scss">
 #app {
   height: 100vh;
+  color: #333;
 }
 </style>

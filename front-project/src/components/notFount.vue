@@ -11,7 +11,7 @@ const back = () => {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 div {
   text-align: center;
   position: relative;
