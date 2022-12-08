@@ -73,3 +73,14 @@ exports.login = (req,res)=>{
         res.send({status:200,token:'Bearer '+tokenStr,msg:'登录成功',data:data})
     })
 }
+
+exports.logout= (req,res) =>{
+    const token = req.headers.authorization
+    jwt.verify(token.slice(7),config.jwtSecretKey,(err)=>{
+        if (err) {
+            res.cc('token验证失败')
+        }else{
+            res.send({status:200,msg:'退出登录成功'})
+        }
+    })
+}
