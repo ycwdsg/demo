@@ -5,3 +5,8 @@ img {
     height: 100%;
 }
 *{margin: 0;padding: 0;}
+
+// 高度相减
+@function sub-height($h,$s){
+    @return calc(#{$h} - #{$s})
+}

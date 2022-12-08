@@ -1,14 +1,6 @@
-import { ConfigProvider } from 'ant-design-vue';
+import { changeTheme } from '@/utils/userConfig';
+import { logout } from '@/utils/token';
 
-// TODO：创建修改主题和设置具体样式的函数
-const changeTheme = () => {
-  document.documentElement.setAttribute('data-theme', 'dark');
-  ConfigProvider.config({
-    theme: {
-      primaryColor: '#ccc'
-    }
-  });
-};
 export const configList = [
   {
     id: 0,
@@ -30,6 +22,12 @@ export const configList = [
     id: 3,
     label: '个性化设置',
     link: '/moreConfig'
+  },
+  {
+    id: 4,
+    label: '退出登录',
+    link: '',
+    method: logout
   }
 ];
 export interface config {

@@ -6,7 +6,6 @@ export const userStore = defineStore('user', {
       username: '',
       jurisdiction: '',
       occupation: '',
-      token: '',
       userInfo: {}
     };
   },
@@ -18,9 +17,6 @@ export const userStore = defineStore('user', {
     getInfo: (state) => {
       return state.userInfo;
     },
-    getToken: (state) => {
-      return state.token;
-    },
     getOccupation: (state) => {
       return state.occupation;
     }
@@ -29,10 +25,7 @@ export const userStore = defineStore('user', {
     setName(name: string) {
       this.username = name;
     },
-    saveToken(token: string) {
-      this.token = token;
-    },
-    setUser(user: userInfo) {
+    setInfo(user: userInfo) {
       this.userInfo = user;
     }
   }

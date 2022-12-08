@@ -1,6 +1,8 @@
 interface userInfo {
   // 头像
   avatar: string;
+  // 个性化
+  personalize: boolean;
 }
 
 interface user {
@@ -13,8 +15,7 @@ interface user {
   occupation: string;
   // 权限
   jurisdiction: string;
-  token: string;
   // 用户信息
-  userInfo?: userInfo;
+  userInfo: userInfo;
   password?: readonly string;
 }

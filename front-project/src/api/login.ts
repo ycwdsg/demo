@@ -19,3 +19,10 @@ export const login = async (data: Pick<user, 'username' | 'password'>) => {
     data
   });
 };
+
+export const logout = async () => {
+  return await request({
+    url: '/api/logout',
+    method: 'post'
+  });
+};

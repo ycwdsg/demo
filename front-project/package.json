@@ -9,6 +9,7 @@
     "lint": "eslint \"src/**/*.{js,jsx,vue,ts,tsx}\" --fix"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
     "@typescript-eslint/parser": "^5.45.0",
     "ant-design-vue": "^3.2.15",
     "axios": "^1.1.3",

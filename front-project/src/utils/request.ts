@@ -3,7 +3,6 @@ import axios from 'axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { message } from 'ant-design-vue';
 import 'ant-design-vue/es/message/style/css';
-import { userStore } from 'store/user';
 import { router } from 'router/index';
 import { getCookie } from './setCookie';
 
@@ -17,8 +16,7 @@ axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8;';
 
 service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    const user = userStore();
-    config.headers!.Authorization = user.getToken || getCookie('token')?.token; // ！非空断言
+    config.headers!.Authorization = getCookie('token')?.token; // ！非空断言
     return config;
   },
   async (err) => {

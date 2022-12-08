@@ -10,7 +10,7 @@ const useCenter = reactive({
   username: user.getName
 });
 
-const menuList = ref([useCenter]);
+const menuList = ref([{ id: 0, label: '首页' }]);
 const handlePop = (item: config) => {
   item.method ? item.method() : '';
 };
@@ -23,8 +23,8 @@ const handlePop = (item: config) => {
     </a-col>
     <a-col :span="16">
       <a-menu v-model="menuList" mode="horizontal">
-        <a-menu-item v-for="item in menuList" :key="item.username">
-          {{ item.username }}
+        <a-menu-item v-for="item in menuList" :key="item.id">
+          {{ item.label }}
         </a-menu-item>
       </a-menu>
     </a-col>
@@ -55,20 +55,25 @@ const handlePop = (item: config) => {
 .top-bar {
   font-size: $font-size;
   height: $tab-height;
-  margin-left: $tab-margin;
-  margin-right: $tab-margin;
+  padding-left: $tab-span;
+  padding-right: $tab-span;
+  @include background-color('background-color');
+  @include color('color');
   .bar-icon {
     @include flex;
     font-size: 30px;
     height: 100%;
     img {
       margin-right: $tab-gap;
+      height: calc($tab-height * 5 / 7);
     }
   }
   .ant-menu {
     @include background-color('background-color');
     border: none;
     @include color('color');
+    height: $tab-height;
+    align-items: center;
   }
   .user-icon {
     @include flex;

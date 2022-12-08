@@ -6,6 +6,7 @@ import { setCookie, getCookie, forgetAccount } from 'utils/setCookie';
 import { encrypt, decrypt } from 'utils/auth';
 import { registerAccount, login } from 'api/login';
 import { setToken } from 'utils/token';
+import { defaultStyle } from 'utils/userConfig';
 
 defineProps<{ msg: string }>();
 interface FormState {
@@ -92,10 +93,13 @@ const onFinish = async (values: FormState) => {
     setToken(res.token as string);
     const store = userStore();
     store.setName(values.username);
-    store.setUser(res.data);
+    store.setInfo(res.data);
     router.push('/index');
   }
 };
+onBeforeMount(() => {
+  defaultStyle();
+});
 onMounted(() => {
   parseAccount();
 });
