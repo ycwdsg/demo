@@ -9,4 +9,53 @@ img {
 // 高度相减
 @function sub-height($h,$s){
     @return calc(#{$h} - #{$s})
+};
+
+// 定义全局颜色变量
+//@sider-background:侧边栏背景色
+$global-colors:(
+    'sider-background':white
+);
+@function root-style($style-name,$style-value){
+    @return var(--#{$style-name}-#{$style-value})
+};
+
+// 定义全局大小变量
+// gutter:块间距，container:内容,viewport:视图
+$global-sizes:(
+    'gutter':30px,
+    'container':(sm:750px,md:970px,lg:1170px),
+    'viewport':(sm:768px,md:970px,lg:1200px)
+);
+
+@function size($size-name,$size-var:null){
+    @if (#{$size-var}!=null) {
+        @return var(--size-#{$size-name}-#{$size-var});
+    }@else{
+        @return var(--size-#{$size-name});
+    }
+};
+.container{
+    margin: var(--size-gutter);
+}
+//TODO 媒体查询不生效
+@each $name,$size in map-get($global-sizes,viewport) {
+    @media screen and (min-width:#{size(viewport,#{$name})}) {
+        .container{width: size(container, #{$name});}
+    }
+}
+
+:root{
+    @each $name,$color in $global-colors {
+        color:#{$color};
+    }
+    @each $name,$size in $global-sizes {
+        @if type-of($size)=='map' {
+            @each $subname,$subsize in $size {
+                --size-#{$name}-#{$subname}:#{$subsize};
+            }
+        } @else if type-of($size)=='number'{
+            --size-#{$name}:#{$size};
+        }
+    };
 }

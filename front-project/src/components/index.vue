@@ -1,20 +1,28 @@
 <script setup lang="ts">
 import { userInfo } from 'api/userInfo';
 import Topbar from 'coms/navBar/topBar.vue';
-import { getThemeStore, setThemeStyle } from '@/utils/userConfig';
+import { setThemeStyle, isPersonal } from '@/utils/userConfig';
+import { styleStore } from '@/store/style';
 
-// TODO:通过pinia持久化管理主题
+const style = styleStore();
 onBeforeMount(() => {
-  const theme = getThemeStore();
-  setThemeStyle(theme);
+  setThemeStyle(style.theme);
 });
+//
 </script>
 <template>
   <div class="main">
     <Topbar />
     <a-layout class="content">
-      <a-layout-sider>sider</a-layout-sider>
-      <a-layout-content>content</a-layout-content>
+      <a-layout-sider
+        :theme="style.theme"
+        :style="
+          isPersonal() ? { background: 'var(--color-sider-background)' } : ''
+        "
+      >
+        sider
+      </a-layout-sider>
+      <a-layout-content class="container">content</a-layout-content>
     </a-layout>
   </div>
 </template>

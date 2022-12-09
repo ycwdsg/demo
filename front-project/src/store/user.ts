@@ -6,7 +6,9 @@ export const userStore = defineStore('user', {
       username: '',
       jurisdiction: '',
       occupation: '',
-      userInfo: {}
+      userInfo: {
+        personalize: false
+      }
     };
   },
   persist: true, // pinia持久化
@@ -19,6 +21,9 @@ export const userStore = defineStore('user', {
     },
     getOccupation: (state) => {
       return state.occupation;
+    },
+    getPersonalize: (state) => {
+      return state.userInfo.personalize;
     }
   },
   actions: {
