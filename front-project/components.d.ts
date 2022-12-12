@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
     ALayout: typeof import('ant-design-vue/es')['Layout']
     ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
+    ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
     ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
@@ -27,6 +28,7 @@ declare module '@vue/runtime-core' {
     NotFount: typeof import('./src/components/notFount.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SiderBar: typeof import('./src/components/navBar/siderBar.vue')['default']
     TopBar: typeof import('./src/components/navBar/topBar.vue')['default']
     Undefined: typeof import('./src/components/index.vue')['default']
   }

@@ -1,34 +1,20 @@
 <script setup lang="ts">
 import { userInfo } from 'api/userInfo';
 import Topbar from 'coms/navBar/topBar.vue';
-import { setThemeStyle, isPersonal } from '@/utils/userConfig';
-import { styleStore } from '@/store/style';
-
-const style = styleStore();
-onBeforeMount(() => {
-  setThemeStyle(style.theme);
-});
-//
+import SiderBar from './navBar/siderBar.vue';
 </script>
 <template>
-  <div class="main">
-    <Topbar />
+  <a-layout class="main">
+    <SiderBar />
     <a-layout class="content">
-      <a-layout-sider
-        :theme="style.theme"
-        :style="
-          isPersonal() ? { background: 'var(--color-sider-background)' } : ''
-        "
-      >
-        sider
-      </a-layout-sider>
-      <a-layout-content class="container">content</a-layout-content>
+      <Topbar />
+      <a-layout-content class="container">container</a-layout-content>
     </a-layout>
-  </div>
+  </a-layout>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .main {
-  @include color('color');
+  @include theme_property(color);
   height: 100vh;
   .content {
     // 调用函数，需要传入变量时，需用插值语法

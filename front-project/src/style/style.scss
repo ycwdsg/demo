@@ -28,26 +28,28 @@ $global-sizes:(
     'viewport':(sm:768px,md:970px,lg:1200px)
 );
 
-@function size($size-name,$size-var:null){
+// 返回根元素
+@function size($size-name,$size-var:null,$key:size){
     @if (#{$size-var}!=null) {
-        @return var(--size-#{$size-name}-#{$size-var});
+        @return var(--#{$key}-#{$size-name}-#{$size-var});
     }@else{
-        @return var(--size-#{$size-name});
+        @return var(--#{$key}-#{$size-name});
     }
 };
 .container{
     margin: var(--size-gutter);
 }
-//TODO 媒体查询不生效
+
+// 媒体查询
 @each $name,$size in map-get($global-sizes,viewport) {
-    @media screen and (min-width:#{size(viewport,#{$name})}) {
+    @media screen and (min-width:$size) {
         .container{width: size(container, #{$name});}
     }
 }
 
 :root{
     @each $name,$color in $global-colors {
-        color:#{$color};
+        --color-#{$name}:#{$color};
     }
     @each $name,$size in $global-sizes {
         @if type-of($size)=='map' {

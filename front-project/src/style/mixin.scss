@@ -2,12 +2,14 @@ $themes:(
     dark:(
         color:white,
         background-color:#242424,
-        border-color:#ccc
+        border-color:#ccc,
+        box-shadow:0px 2px 7px 0px #3e3d3d,
     ),
     light:(
         color:#333,
         background-color:white,
-        border-color:#ccc
+        border-color:#ccc,
+        box-shadow:0px 2px 7px 0px #aaa9a9,
     )
 );
 
@@ -25,23 +27,18 @@ $themes:(
 @function themed($key){
     @return map-get($map: $themeValue, $key: $key)
 };
-// 背景色
-@mixin background_color($color) {
-    @include change-back-transition;
-    @include themeify{
-        background-color: themed($color);
-    }
-}
-// 字体颜色
-@mixin color($color) {
-    @include themeify{
-        color:themed($color)
-    }
-}
-// 边框颜色
-@mixin border_color($color) {
-    @include themeify{
-        border-color:themed($color)
+// 获取主题属性,参数name需要与css属性对应,可传入单个值或数组
+@mixin theme_property($name) {
+    @if type-of($name)!='list' {
+        @include themeify{
+            #{$name}: themed(#{$name});
+        }
+    }@else{
+        @each $key in $name {
+            @include themeify(){
+                #{$key}:themed(#{$key})
+            }
+        }
     }
 }
 
@@ -50,6 +47,11 @@ $themes:(
     display: flex;
     justify-content: $justify;
     align-items: $align;
+}
+
+// 混入过渡,默认颜色
+@mixin transition($key:color,$time:0.3s) {
+    transition: $key $time;
 }
 
 @mixin hover($color:var(--ant-primary-color-hover)) {

@@ -1,28 +1,22 @@
 <script setup lang="ts">
-import useCurrentInstance from 'utils/hooks';
 import { userStore } from '@/store/user';
 import { configList, config } from './configList';
 
-const globalProperties = useCurrentInstance();
 const user = userStore();
+const current = ref([0]);
 const useCenter = reactive({
   avatar: user.getInfo?.avatar,
   username: user.getName
 });
-
-const menuList = ref([{ id: 0, label: '首页' }]);
+const menuList = ref([{ id: 0, label: '首页', path: '/' }]);
 const handlePop = (item: config) => {
   item.method ? item.method() : '';
 };
 </script>
 <template>
   <a-row class="top-bar">
-    <a-col :span="6" class="bar-icon">
-      <img :src="globalProperties.getAssetsFile('/icon.png')" alt="" />
-      拖码
-    </a-col>
-    <a-col :span="16">
-      <a-menu v-model="menuList" mode="horizontal">
+    <a-col :offset="6" :span="16">
+      <a-menu v-model="menuList" :selected-keys="current" mode="horizontal">
         <a-menu-item v-for="item in menuList" :key="item.id">
           {{ item.label }}
         </a-menu-item>
@@ -57,27 +51,20 @@ const handlePop = (item: config) => {
   height: $tab-height;
   padding-left: $tab-span;
   padding-right: $tab-span;
-  @include background-color('background-color');
-  @include color('color');
-  .bar-icon {
-    @include flex;
-    font-size: 30px;
-    height: 100%;
-    img {
-      margin-right: $tab-gap;
-      height: calc($tab-height * 5 / 7);
-    }
-  }
+  @include change-back-transition;
+  @include theme_property((background-color, color, box-shadow));
+
   .ant-menu {
-    @include background-color('background-color');
+    @include theme_property((background-color, color));
+    @include change-back-transition;
     border: none;
-    @include color('color');
     height: $tab-height;
     align-items: center;
   }
   .user-icon {
     @include flex;
     height: 100%;
+    @include transition(color);
     &:hover {
       @include hover;
     }
@@ -91,6 +78,7 @@ const handlePop = (item: config) => {
     width: 100%;
     padding: 2.5px 5px;
     color: #333;
+    @include transition(color);
     &:hover {
       @include hover;
     }
