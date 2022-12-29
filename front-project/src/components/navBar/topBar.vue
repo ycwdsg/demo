@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import useCurrentInstance from 'utils/hooks';
 import { userStore } from '@/store/user';
 import { configList, config } from './configList';
 
+const globalProperties = useCurrentInstance();
 const user = userStore();
 const current = ref([0]);
 const useCenter = reactive({
@@ -15,7 +17,11 @@ const handlePop = (item: config) => {
 </script>
 <template>
   <a-row class="top-bar">
-    <a-col :offset="6" :span="16">
+    <a-col :span="6" class="bar-icon">
+      <img :src="globalProperties.getAssetsFile('icon.png')" alt="" />
+      拖码
+    </a-col>
+    <a-col :span="16">
       <a-menu v-model="menuList" :selected-keys="current" mode="horizontal">
         <a-menu-item v-for="item in menuList" :key="item.id">
           {{ item.label }}
@@ -47,13 +53,21 @@ const handlePop = (item: config) => {
 </template>
 <style lang="scss" scoped>
 .top-bar {
+  z-index: 999;
   font-size: $font-size;
   height: $tab-height;
   padding-left: $tab-span;
   padding-right: $tab-span;
   @include change-back-transition;
   @include theme_property((background-color, color, box-shadow));
-
+  .bar-icon {
+    @include flex(center);
+    font-size: $font-title;
+    img {
+      margin-right: $tab-gap;
+      height: calc($tab-height * 5 / 7);
+    }
+  }
   .ant-menu {
     @include theme_property((background-color, color));
     @include change-back-transition;

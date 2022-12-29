@@ -15,7 +15,18 @@ const routes = [
   {
     path: '/index',
     component: Index,
-    name: 'Index'
+    name: 'Index',
+    meta: {
+      hasSider: true,
+      menu: [
+        { label: '对象引擎', path: '/objectEngine' },
+        {
+          label: '页面绘制引擎',
+          path: '/pageEngine',
+          children: [{ label: '样式引擎', path: '/styleEngine' }]
+        }
+      ]
+    }
   },
   {
     path: '/:pathMatch(.*)*',

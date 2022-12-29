@@ -141,7 +141,7 @@ const submit = () => {
     <div class="loginBox">
       <div class="backBox">
         <p class="tipMessage">{{ msg }}</p>
-        <div class="icon">火</div>
+        <div class="icon">拖</div>
       </div>
       <div class="loginForm">
         <div class="formContent">

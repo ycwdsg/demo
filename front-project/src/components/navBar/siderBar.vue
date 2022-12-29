@@ -1,13 +1,20 @@
 <script setup lang="ts">
-import useCurrentInstance from 'utils/hooks';
-import { setThemeStyle, isPersonal } from '@/utils/userConfig';
+import { isPersonal } from '@/utils/userConfig';
 import { styleStore } from '@/store/style';
+import siderItemVue from './siderItem.vue';
 
-const globalProperties = useCurrentInstance();
+const route = useRoute();
 const style = styleStore();
-onBeforeMount(() => {
-  setThemeStyle(style.theme);
-});
+let dataList: Array<meta> = []; // 不确定类型
+dataList = route.meta?.hasSider ? (route.meta?.menu as Array<meta>) : [];
+if (dataList instanceof Array) {
+  dataList.forEach((e) => {
+    e.children?.length > 0 ? '' : '';
+  });
+}
+function menuClick({ item }) {
+  console.log(item);
+}
 </script>
 
 <template>
@@ -16,25 +23,18 @@ onBeforeMount(() => {
     :style="isPersonal() ? { background: 'var(--color-sider-background)' } : ''"
     class="sider"
   >
-    <a-row>
-      <a-col :span="24" class="bar-icon">
-        <img :src="globalProperties.getAssetsFile('/icon.png')" alt="" />
-        拖码
-      </a-col>
-    </a-row>
+    <a-menu mode="inline">
+      <siderItemVue
+        v-for="(item, index) in dataList"
+        :key="index"
+        :item="item"
+        @click="menuClick"
+      ></siderItemVue>
+    </a-menu>
   </a-layout-sider>
 </template>
 
 <style lang="scss" scoped>
 .sider {
-  .bar-icon {
-    @include flex(center);
-    font-size: $font-title;
-    margin-top: $tab-span;
-    img {
-      margin-right: $tab-gap;
-      height: calc($tab-height * 5 / 7);
-    }
-  }
 }
 </style>

@@ -5,3 +5,10 @@ interface res<T> {
   message?: string;
   token?: string;
 }
+
+// meta类型接口
+interface meta {
+  label: string;
+  path: string;
+  children: Array<meta>;
+}

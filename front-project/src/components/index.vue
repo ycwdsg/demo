@@ -2,13 +2,23 @@
 import { userInfo } from 'api/userInfo';
 import Topbar from 'coms/navBar/topBar.vue';
 import SiderBar from './navBar/siderBar.vue';
+import { styleStore } from '@/store/style';
+import { setThemeStyle } from '@/utils/userConfig';
+
+const style = styleStore();
+onBeforeMount(() => {
+  setThemeStyle(style.theme);
+});
+const route = useRoute();
 </script>
 <template>
   <a-layout class="main">
-    <SiderBar />
+    <Topbar />
     <a-layout class="content">
-      <Topbar />
-      <a-layout-content class="container">container</a-layout-content>
+      <SiderBar v-if="route.meta?.hasSider" />
+      <a-layout-content class="container">
+        <router-view />
+      </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
@@ -17,8 +27,9 @@ import SiderBar from './navBar/siderBar.vue';
   @include theme_property(color);
   height: 100vh;
   .content {
-    // 调用函数，需要传入变量时，需用插值语法
-    height: sub-height(100vh, #{$tab-height});
+    height: calc(100vh - $tab-height);
+    .container {
+    }
   }
 }
 </style>

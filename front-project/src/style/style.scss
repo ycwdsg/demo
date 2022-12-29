@@ -6,10 +6,6 @@ img {
 }
 *{margin: 0;padding: 0;}
 
-// 高度相减
-@function sub-height($h,$s){
-    @return calc(#{$h} - #{$s})
-};
 
 // 定义全局颜色变量
 //@sider-background:侧边栏背景色
@@ -23,9 +19,9 @@ $global-colors:(
 // 定义全局大小变量
 // gutter:块间距，container:内容,viewport:视图
 $global-sizes:(
-    'gutter':30px,
+    'gutter':(sm:10px,md:15px,lg:20px,nm:30px),
     'container':(sm:750px,md:970px,lg:1170px),
-    'viewport':(sm:768px,md:970px,lg:1200px)
+    'viewport':(sm:768px,md:970px,lg:1200px,nm:1600px)
 );
 
 // 返回根元素
@@ -36,21 +32,24 @@ $global-sizes:(
         @return var(--#{$key}-#{$size-name});
     }
 };
-.container{
-    margin: var(--size-gutter);
-}
+
 
 // 媒体查询
 @each $name,$size in map-get($global-sizes,viewport) {
     @media screen and (min-width:$size) {
-        .container{width: size(container, #{$name});}
+        .container{
+            margin: size(gutter, #{$name});
+            width: calc(100% - size(gutter, #{$name}) - size(gutter, #{$name}));
+        }
     }
 }
 
 :root{
+    // 定义根元素颜色样式
     @each $name,$color in $global-colors {
         --color-#{$name}:#{$color};
     }
+    // 定义根元素大小样式
     @each $name,$size in $global-sizes {
         @if type-of($size)=='map' {
             @each $subname,$subsize in $size {
