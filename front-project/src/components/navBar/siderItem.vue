@@ -3,7 +3,7 @@ defineProps<{ item: meta }>();
 </script>
 
 <template>
-  <a-sub-menu v-if="item.children?.length > 0">
+  <a-sub-menu v-if="item.children && item.children.length > 0">
     <template #title>{{ item.label }}</template>
     <a-menu-item v-for="(child, index) in item.children" :key="index">
       {{ child.label }}

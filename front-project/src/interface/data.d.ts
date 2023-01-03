@@ -10,5 +10,5 @@ interface res<T> {
 interface meta {
   label: string;
   path: string;
-  children: Array<meta>;
+  children?: Array<meta>;
 }

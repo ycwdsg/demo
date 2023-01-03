@@ -7,11 +7,7 @@ const route = useRoute();
 const style = styleStore();
 let dataList: Array<meta> = []; // 不确定类型
 dataList = route.meta?.hasSider ? (route.meta?.menu as Array<meta>) : [];
-if (dataList instanceof Array) {
-  dataList.forEach((e) => {
-    e.children?.length > 0 ? '' : '';
-  });
-}
+
 function menuClick({ item }) {
   console.log(item);
 }
