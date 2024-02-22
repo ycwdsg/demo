@@ -32,7 +32,7 @@ app.use('/api',routers.user)
 // 遍历注册其他路由模块
 // app.use('/api',routers.userInfo)
 Object.keys(routers).forEach(val=>{
-    val==='user'?'':app.use('/project',routers[val])
+    val==='user'?'':app.use(`/${val}`,routers[val])
 })
 // 错误级别中间件
 app.use((err,req,res,next)=>{
