@@ -24,10 +24,13 @@ export default defineConfig({
   server: {
     // 向外暴露网络
     host: '0.0.0.0',
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
     proxy: {
       '/api': {
-        target: 'http://192.168.8.51:8888',
-        // target: 'http://192.168.222.86:8888',
+        // target: 'http://192.168.8.51:8888',
+        target: 'http://192.168.222.86:8888',
         changeOrigin: true
       },
       '/project': {
