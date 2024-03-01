@@ -10,7 +10,7 @@ console.log(route.path);
 </script>
 
 <template>
-  <header v-if="route.path !== '/three'">
+  <header v-if="route.path !== '/three' && route.path !== '/game'">
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
@@ -20,6 +20,7 @@ console.log(route.path);
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/three">Three</RouterLink>
+        <RouterLink to="/game">play a game</RouterLink>
       </nav>
     </div>
   </header>
