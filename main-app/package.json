@@ -16,6 +16,7 @@
   "dependencies": {
     "@micro-zoe/micro-app": "^1.0.0-rc.4",
     "pinia": "^2.1.7",
+    "three": "^0.161.0",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },
